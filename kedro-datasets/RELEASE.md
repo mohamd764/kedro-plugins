@@ -7,6 +7,7 @@
 
 ## Breaking changes
 
+- `partitions.PartitionedDataset` now raises `DatasetError` when saving partition IDs with a leading separator (e.g. `"/2020/01"`); use relative IDs (e.g. `"2020/01"`) instead.
 ## Breaking changes to experimental datasets
 
 ## Bug fixes and other changes
@@ -16,12 +17,16 @@
 - Exposed `load` and `save` publicly for `spark.SparkDatasetV2`, `databricks.ManagedTableDataset`, and the experimental vector store datasets, consistent with other datasets.
 - Added the missing `spark-gbqquerydataset` extra for `spark.GBQQueryDataset` and included it in `spark-all`.
 - Fixed the API docs to list public members, including undocumented and inherited ones (such as `load` and `save`), instead of private members.
+- Fixed Hugging Face `CSVDataset`, `JSONDataset` and `ParquetDataset` writing outside the dataset directory when saving a `DatasetDict` with unsafe split names.
+- Fixed `matplotlib.MatplotlibDataset` writing outside the dataset directory; absolute plot names now raise `DatasetError`.
+- Fixed `matplotlib.MatplotlibDataset` failing to save versioned datasets on Windows when `filepath` is an `os.PathLike`.
 
 ## Community contributions
 
 - [akira-in-tech](https://github.com/akira-in-tech)
 - [Tanmay Singh](https://github.com/tannnmayy)
 - [Shizoqua](https://github.com/Shizoqua)
+- [Mohamed Fouad](https://github.com/mohamd764)
 
 # Release 9.6.0
 
